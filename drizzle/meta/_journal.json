@@ -15,6 +15,13 @@
       "when": 1768918099062,
       "tag": "0001_icy_vindicator",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1768927240612,
+      "tag": "0002_watery_marvex",
+      "breakpoints": true
     }
   ]
 }
