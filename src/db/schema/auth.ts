@@ -22,7 +22,7 @@ export const roleEnum = pgEnum("role", ["student", "teacher", "admin"]);
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
-  email: text("email").notNull(),
+  email: text("email").notNull().unique(),
   emailVerified: boolean("email_verified").notNull(),
   image: text("image"),
   role: roleEnum("role").notNull().default("student"),
@@ -70,15 +70,13 @@ export const account = pgTable(
 
     ...timestamps,
   },
-  (table) => [
-    {
-      userIdIdx: index("account_user_id_idx").on(table.userId),
-      accountUnique: uniqueIndex("account_provider_account_unique").on(
-        table.providerId,
-        table.accountId,
-      ),
-    },
-  ],
+  (table) => ({
+    userIdIdx: index("account_user_id_idx").on(table.userId),
+    accountUnique: uniqueIndex("account_provider_account_unique").on(
+      table.providerId,
+      table.accountId,
+    ),
+  }),
 );
 
 export const verification = pgTable(
