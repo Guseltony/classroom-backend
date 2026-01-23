@@ -34,6 +34,7 @@ app.use(
 );
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.all("/api/auth/*splat", toNodeHandler(auth));
 
