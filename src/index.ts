@@ -1,6 +1,13 @@
+// import("apminsight")
+//   .then(({ default: AgentAPI }) => AgentAPI.config())
+//   .catch(() => console.log("APM not available in this environment"));
+
+import AgentAPI from "apminsight";
+AgentAPI.config();
+
 import express from "express";
 import subjectsRouter from "./routes/subjects";
-import cors from 'cors'
+import cors from "cors";
 import securityMiddleware from "./middleware/security";
 import { toNodeHandler } from "better-auth/node";
 import { auth } from "./lib/auth";
@@ -24,14 +31,13 @@ app.all("/api/auth/*splat", toNodeHandler(auth));
 
 app.use(express.json());
 
-app.use(securityMiddleware)
+app.use(securityMiddleware);
 
-app.use('/api/subjects', subjectsRouter )
+app.use("/api/subjects", subjectsRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello, wecome to the classroom API");
 });
-
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
